@@ -1,0 +1,48 @@
+<div class="secondary-greeting h-8">
+    <span class="block text-2xl">Welcome</span>
+</div>
+
+<div class="primary-greeting h-20">
+    <h1 class="block uppercase">Let's get started...</h1>
+</div>
+
+<style>
+    h1 {
+        animation: 1s reveal-main;
+    }
+
+    span {
+        animation: 1s reveal-secondary;
+    }
+
+    h1,
+    span {
+        font-family: "Raleway", sans-serif;
+        font-weight: 700;
+    }
+
+    .primary-greeting,
+    .secondary-greeting {
+        overflow-y: hidden;
+    }
+
+    @keyframes reveal-secondary {
+        from {
+            transform: translateY(-100%);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes reveal-main {
+        from {
+            transform: translateY(100%);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
+</style>

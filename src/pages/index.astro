@@ -1,15 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Card from "../components/Card.astro";
+import IntroHeader from "@components/IntroHeader.astro";
+import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout title="Come code with Luke.">
-	<main>
-		<Header />
-		<Card href="This is a ref" body="This is body" title="This is a title">
-			<h1 slot="myslot">My Name is Luke</h1>
-		</Card>
+<Layout title="Come code with me.">
+	<main class="h-screen grid place-content-center">
+		<IntroHeader />
 	</main>
 </Layout>
-	
