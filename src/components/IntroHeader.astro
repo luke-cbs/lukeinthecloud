@@ -14,7 +14,9 @@
 
 <style>
     h1 {
-        animation: 1s reveal-main;
+        animation: .5s reveal-main forwards;
+        animation-delay: .5s;
+        transform: translateX(-100%);
     }
 
     span {
@@ -33,11 +35,11 @@
 
     @keyframes reveal-main {
         from {
-            transform: translateY(100%);
+            transform: translateX(-100%);
         }
 
         to {
-            transform: translateY(0);
+            transform: translateX(0);
         }
     }
 </style>

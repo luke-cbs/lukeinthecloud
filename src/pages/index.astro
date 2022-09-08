@@ -1,12 +1,27 @@
 ---
 import IntroHeader from "@components/IntroHeader.astro";
 import NavHeader from "@components/NavHeader.astro";
+import Pillar from "@components/Pillar.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout title="Come code with me.">
 	<NavHeader />
 	<main class="h-screen grid place-content-center">
-		<IntroHeader />
+		<!-- <IntroHeader /> -->
+		<div class="flex w-screen h-[30rem]">
+			<Pillar delay="1s"/>
+			<Pillar delay="1.5s"/>
+			<Pillar delay=".5s"/>
+			<Pillar delay="2s"/>
+		</div>
 	</main>
 </Layout>
+
+<style>
+	div {
+		position: absolute;
+		top: 60%;
+	}
+</style>
+
