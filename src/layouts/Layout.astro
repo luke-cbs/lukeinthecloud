@@ -1,9 +1,12 @@
 ---
 export interface Props {
 	title: string;
+	hasOverflow: boolean;
 }
 
-const { title } = Astro.props;
+const { title, hasOverflow = true } = Astro.props;
+
+const overflowType = !hasOverflow ? "overflow-hidden" : "overflow";
 ---
 
 <!DOCTYPE html>
@@ -15,11 +18,14 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<script src="https://kit.fontawesome.com/dab29081a1.js" crossorigin="anonymous"></script>
-	<body>
+	<script
+		src="https://kit.fontawesome.com/dab29081a1.js"
+		crossorigin="anonymous"
+	></script>
+	<body class={`${overflowType} bg-neutral-900`}>
 		<slot />
 		<style is:global>
-			@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Raleway:wght@400;500;900&family=Roboto:ital,wght@0,400;0,500;0,900;1,300&display=swap');
+			@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Raleway:wght@400;500;900&family=Roboto:ital,wght@0,400;0,500;0,900;1,300&display=swap");
 
 			h1 {
 				font-size: var(--font-size-xl);

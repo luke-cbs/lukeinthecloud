@@ -1,27 +1,89 @@
 ---
-import IntroHeader from "@components/IntroHeader.astro";
+import Logo from "@components/Logo.astro";
 import NavHeader from "@components/NavHeader.astro";
-import Pillar from "@components/Pillar.astro";
 import Layout from "@layouts/Layout.astro";
+import Footer from "@components/Footer.astro";
+import LandingHeader from "@components/LandingHeader.astro";
+
+const hasOverflow = false;
+const logos = [
+	"angular",
+	"css",
+	"go",
+	"html",
+	"javascript",
+	"jest",
+	"nestjs",
+	"next-js",
+	"node",
+	"prisma",
+	"react",
+	"sass",
+	"tailwindcss",
+	"typescript",
+	"vue",
+];
 ---
 
-<Layout title="Come code with me.">
-	<NavHeader />
-	<main class="h-screen grid place-content-center">
-		<!-- <IntroHeader /> -->
-		<div class="flex w-screen h-[30rem]">
-			<Pillar delay="1s"/>
-			<Pillar delay="1.5s"/>
-			<Pillar delay=".5s"/>
-			<Pillar delay="2s"/>
-		</div>
-	</main>
+<Layout hasOverflow={hasOverflow} title="Come code with me.">
+	<div class="h-screen flex flex-col justify-between">
+		<NavHeader />
+		<main
+			class="relative w-screen h-full place-content-center flex flex-col justify-center items-center"
+		>
+			<LandingHeader />
+			<div
+				id="logo-container"
+				class="absolute w-full h-full hidden justify-center items-center z-0"
+			>
+				{logos.map((logo) => <Logo logo={logo} />)}
+			</div>
+		</main>
+		<Footer />
+	</div>
 </Layout>
 
-<style>
-	div {
-		position: absolute;
-		top: 60%;
-	}
-</style>
+<script>
+	import anime from "animejs";
 
+	const innerHeight = window.innerHeight / 2;
+	const innerWidth = window.innerWidth / 2;
+	const logoContainerEl = document.getElementById("logo-container");
+
+	window.addEventListener("load", (event) => {
+		if (logoContainerEl) {
+			logoContainerEl.classList.remove("hidden");
+			logoContainerEl.classList.add("flex");
+		}
+
+		setTimeout(animation, 1000);
+	});
+
+	anime.set(".logo", {
+		translateX: function () {
+			return anime.random(-innerWidth, innerWidth);
+		},
+		translateY: function () {
+			return anime.random(0, innerHeight);
+		},
+		scale: 0,
+	});
+
+	function animation() {
+		anime({
+			targets: ".logo",
+			translateX: function () {
+				return anime.random(-innerWidth, innerWidth);
+			},
+			translateY: function (el: any) {
+				return anime.random(-el.parentElement.offsetHeight/2, innerHeight);
+			},
+			scale: function () {
+				return anime.random(0.5, 1);
+			},
+			easing: "easeInOutQuad",
+			duration: 10000,
+			complete: animation,
+		});
+	}
+</script>

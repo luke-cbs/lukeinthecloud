@@ -1,0 +1,75 @@
+<div class="relative flex flex-col z-20 rounded p-4">
+    <div class="relative overflow-y-hidden h-8 z-10">
+        <span class="block text-2xl reveal-secondary"
+            >Hi, I'm <b>Luke</b> and I make sites...</span
+        >
+    </div>
+
+    <div class="relative overflow-y-hidden h-20 z-20">
+        <h1 class="block uppercase font-raleway font-bold">
+            Blazingly
+            <span class="shadow">Fast</span>
+            🔥
+        </h1>
+    </div>
+</div>
+<div class="absolute w-2/3 h-1/2 black-hole z-0"></div>
+
+<style>
+    .black-hole {
+        background: radial-gradient(
+            ellipse at center,
+            rgba(1, 1, 1, 1) 0%,
+            rgba(1, 1, 1, 1) 10%,
+            rgba(1, 1, 1, 1) 25%,
+            rgba(1, 1, 1, 0.3) 50%,
+            rgba(1, 1, 1, 0) 75%,
+            rgba(255, 255, 255, 0) 100%
+        );
+    }
+
+    .shadow {
+        color: #fff;
+        animation: .3s 1s text-shadow-reveal forwards;
+    }
+
+    h1 {
+        animation: 0.5s reveal-main forwards;
+        animation-delay: 0.5s;
+        transform: translateX(-110%);
+    }
+
+    .reveal-secondary {
+        animation: 1s reveal-secondary;
+    }
+
+    @keyframes reveal-secondary {
+        from {
+            transform: translateY(-110%);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes reveal-main {
+        from {
+            transform: translateX(-110%);
+        }
+
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes text-shadow-reveal {
+        from {
+            text-shadow: 0 0 0 #AA3400;
+        }
+
+        to {
+            text-shadow: 4px 4px 0 #AA3400;
+        }
+    }
+</style>
