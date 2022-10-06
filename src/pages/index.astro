@@ -25,17 +25,12 @@ const logos = [
 
 <Layout hasOverflow={hasOverflow} title="Come code with me.">
 	<LandingHeader />
-	<div
-		id="logo-container"
-		class="absolute w-full h-full hidden justify-center items-center z-0"
-	>
+	<div id="logo-container" class="bottom-0 fixed hidden z-0">
 		{logos.map((logo) => <Logo logo={logo} />)}
 	</div>
-
 	<script>
-		import anime from "../../node_modules/animejs";
+		import anime from "animejs";
 
-		const innerHeight = window.innerHeight / 2;
 		const innerWidth = window.innerWidth / 2;
 		const logoContainerEl = document.getElementById("logo-container");
 
@@ -44,38 +39,44 @@ const logos = [
 				logoContainerEl.classList.remove("hidden");
 				logoContainerEl.classList.add("flex");
 			}
-
-			setTimeout(animation, 1000);
-		});
-
-		anime.set(".logo", {
-			translateX: function () {
-				return anime.random(-innerWidth, innerWidth);
-			},
-			translateY: function () {
-				return anime.random(0, innerHeight);
-			},
-			scale: 0,
+			reset();
+			animation();
 		});
 
 		function animation() {
-			anime({
+			const tl: any = anime.timeline({
 				targets: ".logo",
+				delay: anime.stagger(3000),
+				loop: true,
+				duration: 10000,
+				easing: "easeInOutQuad",
+			});
+
+			tl.add({
 				translateX: function () {
-					return anime.random(-innerWidth, innerWidth);
+					return anime.random(-innerWidth / 3, innerWidth / 3);
 				},
-				translateY: function (el) {
-					return anime.random(
-						-el.parentElement.offsetHeight / 2,
-						innerHeight
-					);
-				},
+				translateY: `-${window.innerHeight}`,
 				scale: function () {
 					return anime.random(0.5, 1);
 				},
-				easing: "easeInOutQuad",
-				duration: 10000,
-				complete: animation,
+			}).add(
+				{
+					targets: ".logo",
+					opacity: 0,
+					duration: 1000,
+				},
+				6000
+			);
+		}
+
+		function reset() {
+			anime.set(".logo", {
+				translateX: function () {
+					return anime.random(-innerWidth, innerWidth);
+				},
+				translateY: "100px",
+				opacity: 1,
 			});
 		}
 	</script>
