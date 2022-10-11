@@ -60,14 +60,23 @@ const logos = [
 				scale: function () {
 					return anime.random(0.5, 1);
 				},
-			}).add(
-				{
-					targets: ".logo",
-					opacity: 0,
-					duration: 1000,
-				},
-				6000
-			);
+			})
+				.add(
+					{
+						targets: ".logo",
+						opacity: .3,
+						duration: 1000,
+					},
+					5000
+				)
+				.add(
+					{
+						targets: ".logo",
+						opacity: 0,
+						duration: 1000,
+					},
+					6000
+				);
 		}
 
 		function reset() {

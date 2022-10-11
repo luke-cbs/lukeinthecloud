@@ -1,10 +1,21 @@
+---
+import type { PageType } from "@layouts/Layout.astro";
+
+export interface Props {
+    page: PageType;
+}
+
+const { page } = Astro.props;
+---
+
 <header class="relative flex justify-between w-full py-5 px-10 z-10">
-    <div class="flex font-fira font-bold items-center w-14">
-        <img src="/code-with-luke.png" alt="">
-    </div>
-    <nav>
-        <ul class="flex text-white text-2xl gap-4">
-            <li>
+    <a href="/" class="flex font-fira font-bold items-center w-14">
+        <img src="/code-with-luke.png" alt="" />
+    </a>
+
+    <nav class="flex items-center">
+        <ul class="flex items-center text-white text-2xl leading-[0] gap-4 font-bold">
+            <li class={`${page === 'blog'? 'underline': ''}`}>
                 <a href="blog" class="text-xs">BLOG</a>
             </li>
         </ul>

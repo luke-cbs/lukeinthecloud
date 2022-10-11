@@ -1,34 +1,34 @@
 ---
-import Layout from "../layouts/Layout.astro";
-
-const hasOverflow = true;
+import Layout, { PageType } from "../layouts/Layout.astro";
+const hasOverflow = false;
+const page: PageType = 'blog';
 ---
 
-<Layout hasOverflow={hasOverflow} title="Welcome my Blog.">
-	<div
-		class="w-3/4 grid overflow-hidden grid-cols-2 grid-rows-auto gap-4 grid-flow-row"
-	>
-		<div class="box row-span-2">1</div>
-		<div class="box col-start-2 col-span-1">2</div>
-		<div class="box col-start-2 col-span-1">3</div>
-		<div class="box">5</div>
-		<div class="box">6</div>
-		<div class="box">6</div>
-		<div class="box">6</div>
-		<div class="box">6</div>
-		<div class="box">6</div>
-		<div class="box">6</div>
-		<div class="box">6</div>
+<Layout hasOverflow={hasOverflow} page={page} title="Welcome my Blog.">
+	<div class="w-3/4 mt-10">
+		<h1 class="text-left block uppercase font-raleway font-bold text-3xl">
+			Recent Articles
+		</h1>
+		<div
+			class="grid overflow-hidden grid-cols-3 grid-rows-6 gap-2 grid-flow-row"
+		>
+			<div class="box row-span-3 col-span-3"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+			<div class="box"></div>
+		</div>
 	</div>
 
 	<style>
 		.box {
-			@apply bg-indigo-700
-			text-gray-100
-			min-w-full
+			@apply min-w-full
 			h-32
 			min-h-full
-			rounded;
+			rounded
+			/* border-2 */;
 		}
 	</style>
 </Layout>
