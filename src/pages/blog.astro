@@ -1,31 +1,57 @@
 ---
 import ArticleCard from "@components/ArticleCard.astro";
 import Layout, { PageType } from "../layouts/Layout.astro";
+
+export type Article = {
+	published_timestamp: string;
+	social_image: string;
+	cover_image: string;
+	description: string;
+	title: string;
+};
+
 const hasOverflow = false;
 const page: PageType = "blog";
+const articlesResponse = await fetch(
+	"https://dev.to/api/articles?username=codewithluke"
+);
+const articles = await articlesResponse.json();
 ---
 
 <Layout hasOverflow={hasOverflow} page={page} title="Welcome to my Blog.">
-	<div class="w-3/4 mt-10">
+	<div class="md:w-4/6 w-full mt-10">
 		<h1 class="text-left block uppercase font-raleway font-bold text-3xl">
 			Recent Articles
 		</h1>
-		<div class="grid grid-cols-3 grid-flow-row auto-rows-auto gap-6 mt-10">
-			<ArticleCard />
-			<ArticleCard />
-			<ArticleCard />
-			<ArticleCard />
-			<ArticleCard />
-			<ArticleCard />
+		<div
+			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row auto-rows-auto gap-6 mt-10"
+		>
+			{
+				articles.map((article: Article, index: number) => (
+					<ArticleCard
+						index={index}
+						title={article.title}
+						bannerImage={
+							article.cover_image
+								? article.cover_image
+								: article.social_image
+						}
+						date={article.published_timestamp}
+					/>
+				))
+			}
 		</div>
 	</div>
 </Layout>
+
+<script></script>
+
 <style>
 	:global(article:first-child) {
-		@apply col-span-3;
+		@apply lg:col-span-3 md:col-span-2 col-span-1;
 	}
 
 	:global(article:not(first-child)) {
-		@apply md:col-span-1 col-span-3;
+		@apply col-span-1;
 	}
 </style>
