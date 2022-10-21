@@ -1,19 +1,18 @@
 ---
-const { title, date, bannerImage, index } = Astro.props;
+import { Image } from "@astrojs/image/components";
+const { title, date, bannerImage, url } = Astro.props;
 ---
 
-<article
-    class={`flex items-start justify-start gap-2 ${
-        index > 0 ? "flex-col" : "flex-col md:flex-row"
-    }`}
->
-    <div class="flex flex-1">
-        <img src={bannerImage} alt={title} />
-    </div>
-    <div class="flex flex-1 flex-col mt-2">
-        <span class="text-xs font-bold">{new Date(date).toDateString()}</span>
-        <h2 class="text-base underline mt-2">{title}</h2>
-    </div>
+<article class={`flex items-start justify-start gap-2 flex-col`}>
+    <a href={url} target="_blank">
+        <Image
+            src={bannerImage}
+            format={"png"}
+            height={"400px"}
+            aspectRatio={4 / 3}
+            alt={title}
+        />
+    </a>
 </article>
 
 <style>

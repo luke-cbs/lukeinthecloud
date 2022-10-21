@@ -8,23 +8,21 @@ export type Article = {
 	cover_image: string;
 	description: string;
 	title: string;
+	url: string;
 };
 
 const hasOverflow = false;
 const page: PageType = "blog";
-const articlesResponse = await fetch(
-	"https://dev.to/api/articles?username=codewithluke"
-);
-const articles = await articlesResponse.json();
+let articles: Article[] = [];
 ---
 
 <Layout hasOverflow={hasOverflow} page={page} title="Welcome to my Blog.">
-	<div class="md:w-4/6 w-full mt-10">
+	<div class="md:w-5/6 p-4 w-full overflow-y-scroll">
 		<h1 class="text-left block uppercase font-raleway font-bold text-3xl">
 			Recent Articles
 		</h1>
 		<div
-			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row auto-rows-auto gap-6 mt-10"
+			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-flow-row auto-rows-auto gap-6 mt-10"
 		>
 			{
 				articles.map((article: Article, index: number) => (
@@ -36,6 +34,7 @@ const articles = await articlesResponse.json();
 								? article.cover_image
 								: article.social_image
 						}
+						url={article.url}
 						date={article.published_timestamp}
 					/>
 				))
@@ -44,11 +43,21 @@ const articles = await articlesResponse.json();
 	</div>
 </Layout>
 
-<script></script>
+<script is:inline>
+	fetch("/articles", {
+		method: "GET",
+	})
+		.then((response) => response.json())
+		.then((articlesRes) => {
+			console.log(articles);
+			articles = articlesRes;
+		});
+</script>
 
 <style>
-	:global(article:first-child) {
-		@apply lg:col-span-3 md:col-span-2 col-span-1;
+	:global(article:first-child),
+	:global(article:nth-child(2)) {
+		@apply lg:col-span-2 col-span-1;
 	}
 
 	:global(article:not(first-child)) {

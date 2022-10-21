@@ -1,0 +1,33 @@
+---
+import Layout, { PageType } from "../layouts/Layout.astro";
+
+const hasOverflow = false;
+const page: PageType = "about";
+---
+
+<Layout hasOverflow={hasOverflow} page={page} title="Welcome to my Blog.">
+	<div class="p-4 w-3/6">
+		<h1 class="text-left block uppercase font-raleway font-bold text-3xl">
+			About Me
+		</h1>
+		<div class="mt-10">
+			<p>Hey there! My name is <b>Luke</b>.</p><br>
+			<p>
+				Currently working as a <b>Fullstack Dev</b> in the e-gaming industry.
+				I have been working in the web and coding away for close to 8 years!
+				i have a nice mix of working with both small and large teams, with
+				a range of different tech.
+			</p><br>
+			<p>
+				There are too many things to name that I enjoy working with.
+				However at the moment I am deep into <b>Golang</b> and <b>Solid JS</b> with
+				<b>Typescript</b>!
+			</p><br>
+			<p>
+				Feel free to checkout my blog as well as my other social
+				platforms!
+			</p>
+		</div>
+	</div>
+</Layout>
+

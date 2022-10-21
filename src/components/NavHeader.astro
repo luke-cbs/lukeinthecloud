@@ -8,15 +8,19 @@ export interface Props {
 const { page } = Astro.props;
 ---
 
-<header class="w-11/12 relative flex justify-between w-full py-5 px-10 z-10">
+<header class="w-11/12 relative flex justify-between py-5 px-10 z-10">
     <a href="/" class="flex font-fira font-bold items-center w-14">
         <img src="/code-with-luke.png" alt="" />
     </a>
 
     <nav class="flex items-center">
         <ul class="flex items-center text-white text-2xl leading-[0] gap-4 font-bold">
+            <li class={`${page === 'about'? 'underline': ''}`}>
+                <a href="about" class="text-xs uppercase">about</a>
+            </li>
+
             <li class={`${page === 'blog'? 'underline': ''}`}>
-                <a href="blog" class="text-xs">BLOG</a>
+                <a href="blog" class="text-xs uppercase">blog</a>
             </li>
         </ul>
     </nav>
