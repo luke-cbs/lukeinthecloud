@@ -8,5 +8,5 @@ export const get: APIRoute = async ({ request }) => {
     const articles = await articlesResponse.json();
     return new Response(JSON.stringify(articles), {
         status: 200
-    })
+    });
 }

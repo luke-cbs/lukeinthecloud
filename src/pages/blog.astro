@@ -1,5 +1,4 @@
 ---
-import ArticleCard from "@components/ArticleCard.astro";
 import Layout, { PageType } from "../layouts/Layout.astro";
 
 export type Article = {
@@ -13,7 +12,6 @@ export type Article = {
 
 const hasOverflow = false;
 const page: PageType = "blog";
-let articles: Article[] = [];
 ---
 
 <Layout hasOverflow={hasOverflow} page={page} title="Welcome to my Blog.">
@@ -22,23 +20,9 @@ let articles: Article[] = [];
 			Recent Articles
 		</h1>
 		<div
-			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 grid-flow-row auto-rows-auto gap-6 mt-10"
+			id="ArticleContainer"
+			class="grid grid-flow-row auto-rows-auto gap-6 mt-10"
 		>
-			{
-				articles.map((article: Article, index: number) => (
-					<ArticleCard
-						index={index}
-						title={article.title}
-						bannerImage={
-							article.cover_image
-								? article.cover_image
-								: article.social_image
-						}
-						url={article.url}
-						date={article.published_timestamp}
-					/>
-				))
-			}
 		</div>
 	</div>
 </Layout>
@@ -49,18 +33,31 @@ let articles: Article[] = [];
 	})
 		.then((response) => response.json())
 		.then((articlesRes) => {
-			console.log(articles);
-			articles = articlesRes;
+			console.log(articlesRes);
+			const articleContainer =
+				document.querySelector("#ArticleContainer");
+			let template = "";
+			articlesRes.forEach((element) => {
+				const tags = element.tag_list.map((tag) => `#${tag}`).join(' ');
+				const article = `
+					<a href='${element.url}' target='_blank'>
+						<article>
+							<h2>${element.title}</h2>
+							<div class='flex justify-between'>
+								<div class='text-slate-500'>
+									${tags}		
+								</div>
+								<div class='text-slate-600 text-right'>
+									${element.readable_publish_date}
+								</div>
+							</div>
+						</article>
+					</a>	
+					<hr class='border-slate-600'>
+				`;
+				template += article;
+			});
+			articleContainer.innerHTML = template;
 		});
 </script>
 
-<style>
-	:global(article:first-child),
-	:global(article:nth-child(2)) {
-		@apply lg:col-span-2 col-span-1;
-	}
-
-	:global(article:not(first-child)) {
-		@apply col-span-1;
-	}
-</style>
